@@ -5,43 +5,53 @@ LOGGED_USER_HOME=$(eval echo ~${SUDO_USER})
 LOGGED_USER=$USER
 TMP_DIR=/tmp
 CODE_NAME=$(lsb_release -csu 2> /dev/null || lsb_release -cs)
+FUNCTION_NAME=$1
 
 init()
 {
+  execute_function
   select_packages
   install_packages
   install_configuration
+}
+
+execute_function()
+{
+if [ "$FUNCTION_NAME" ]; then
+    type $FUNCTION_NAME &>/dev/null && eval $FUNCTION_NAME || echo "function $FUNCTION_NAME does not exist."
+  exit 1
+fi
 }
 
 select_packages()
 {
   echo "Please confirm package for installation..."
 
-#  confirm "install_gnome_tweak_tool->(y|n)" "install_gnome_tweak_tool"
-#  confirm "install_vim->(y|n)" "install_vim"
-#  confirm "install_openssh_server->(y|n)" "install_openssh_server"
-#  confirm "install_git->(y|n)" "install_git"
-#  confirm "install_composer->(y|n)" "install_composer"
-#  confirm "install_nginx->(y|n)" "install_nginx"
-#  confirm "install_php_fpm->(y|n)" "install_php_fpm"
-#  confirm "install_symfony_php_extension->(y|n)" "install_symfony_php_extension"
-#  confirm "install_symfony->(y|n)" "install_symfony"
-#  confirm "install_codesniffer->(y|n)" "install_codesniffer"
-#  confirm "install_php_cs_fixer->(y|n)" "install_php_cs_fixer"
-#  confirm "install_virtualbox->(y|n)" "install_virtualbox"
-#  confirm "install_nvm->(y|n)" "install_nvm"
-#  confirm "install_phpstorm->(y|n)" "install_phpstorm"
-#  confirm "install_datagrip->(y|n)" "install_datagrip"
-#  confirm "install_postman->(y|n)" "install_postman"
-#  confirm "install_skype->(y|n)" "install_skype"
-#  confirm "install_mysql_server->(y|n)" "install_mysql_server"
-#  confirm "install_docker->(y|n)" "install_docker"
-#  confirm "install_mpv->(y|n)" "install_mpv"
-#  confirm "install_google_chrome->(y|n)" "install_google_chrome"
-#  confirm "install_chrome_gnome_shell->(y|n)" "install_chrome_gnome_shell"
-#  confirm "install_slack->(y|n)" "install_slack"
+  confirm "install_gnome_tweak_tool->(y|n)" "install_gnome_tweak_tool"
+  confirm "install_vim->(y|n)" "install_vim"
+  confirm "install_openssh_server->(y|n)" "install_openssh_server"
+  confirm "install_git->(y|n)" "install_git"
+  confirm "install_composer->(y|n)" "install_composer"
+  confirm "install_nginx->(y|n)" "install_nginx"
+  confirm "install_php_fpm->(y|n)" "install_php_fpm"
+  confirm "install_symfony_php_extension->(y|n)" "install_symfony_php_extension"
+  confirm "install_symfony->(y|n)" "install_symfony"
+  confirm "install_codesniffer->(y|n)" "install_codesniffer"
+  confirm "install_php_cs_fixer->(y|n)" "install_php_cs_fixer"
+  confirm "install_virtualbox->(y|n)" "install_virtualbox"
+  confirm "install_nvm->(y|n)" "install_nvm"
+  confirm "install_phpstorm->(y|n)" "install_phpstorm"
+  confirm "install_datagrip->(y|n)" "install_datagrip"
+  confirm "install_postman->(y|n)" "install_postman"
+  confirm "install_skype->(y|n)" "install_skype"
+  confirm "install_mysql_server->(y|n)" "install_mysql_server"
+  confirm "install_docker->(y|n)" "install_docker"
+  confirm "install_mpv->(y|n)" "install_mpv"
+  confirm "install_google_chrome->(y|n)" "install_google_chrome"
+  confirm "install_chrome_gnome_shell->(y|n)" "install_chrome_gnome_shell"
+  confirm "install_slack->(y|n)" "install_slack"
 
-  echo "Package confirmation done :)"docker run hello-world
+  echo "Package confirmation done :)"
 }
 
 install_packages()
@@ -69,6 +79,7 @@ install_configuration()
   # configure mpv auto sub download
   # bash aliases setup
   # Configuring MySQL
+  # generate ssh key
   echo "Configuration have been installed for you :)"
 }
 
@@ -344,10 +355,16 @@ install_google_chrome()
 {
   echo "Installing google chrome..."
 
-  if [ ! -f $TMP_DIR/google-chrome-stable_current_amd64.deb ]; then
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-    sudo apt install -y ./google-chrome-stable_current_amd64.deb
-  fi
+#  if [ ! -f $TMP_DIR/google-chrome-stable_current_amd64.deb ]; then
+#    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+#    sudo apt install -y ./google-chrome-stable_current_amd64.deb
+#  fi
+
+  ## Google Chrome
+  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+  sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+  sudo apt-get update
+  sudo apt-get install google-chrome-stable
 
   echo "Google chrome have been installed for you :)"
 }
@@ -361,24 +378,4 @@ install_chrome_gnome_shell()
   echo "Chrome gnome shell have been installed for you :)"
 }
 
-install_test()
-{
-
-## Google Chrome
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-sudo apt-get update
-sudo apt-get install google-chrome-stable
-
-
-## setup ssh keys for github
-ssh-keygen -t rsa -C "mail@khanio.com"
-xclip -sel clip < ~/.ssh/id_rsa.pub
-ssh -T git@github.com
-}
-
 init
-
-
-# implement a progress bar
-# run only specific function

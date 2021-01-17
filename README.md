@@ -1,5 +1,10 @@
 # Ubuntu Setup Script
-A simple script to setup a fresh ubuntu
+A setup script for ubuntu
 
 ## Usage
-`bash su -c "bash <(wget -qO- https://raw.githubusercontent.com/habibun/ubuntu-setup/main/desktop.sh)"`
+
+wget: `bash <(wget -qO- https://raw.githubusercontent.com/habibun/ubuntu-setup/main/desktop.sh)`
+
+curl: `bash <(curl -s https://raw.githubusercontent.com/habibun/ubuntu-setup/main/desktop.sh)`
+
+execute specific function: `curl -s https://raw.githubusercontent.com/habibun/ubuntu-setup/main/desktop.sh | bash /dev/stdin function_name`
