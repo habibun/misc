@@ -7,6 +7,7 @@ TMP_DIR=/tmp
 CODE_NAME=$(lsb_release -csu 2> /dev/null || lsb_release -cs)
 FUNCTION_NAME=$1
 
+# utility
 init()
 {
   execute_function
@@ -73,13 +74,11 @@ install_packages()
 install_configuration()
 {
   echo "Installing configuration..."
-  # git username and email
-  # select node version
-  # configure nginx virtual host
-  # configure mpv auto sub download
-  # bash aliases setup
-  # Configuring MySQL
-  # generate ssh key
+
+  config_generate_ssh_key
+  config_git
+  config_mysql
+
   echo "Configuration have been installed for you :)"
 }
 
@@ -90,6 +89,7 @@ confirm(){
     esac
 }
 
+# installation
 install_openssh_server()
 {
   echo "Installing openssh server..."
@@ -355,11 +355,6 @@ install_google_chrome()
 {
   echo "Installing google chrome..."
 
-#  if [ ! -f $TMP_DIR/google-chrome-stable_current_amd64.deb ]; then
-#    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-#    sudo apt install -y ./google-chrome-stable_current_amd64.deb
-#  fi
-
   ## Google Chrome
   wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
   sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
@@ -376,6 +371,71 @@ install_chrome_gnome_shell()
   sudo apt-get install -y chrome-gnome-shell
 
   echo "Chrome gnome shell have been installed for you :)"
+}
+
+install_team_viewer()
+{
+  echo "Installing team viewer..."
+
+  sudo apt-get install -y chrome-gnome-shell
+
+  echo "Team viewer have been installed for you :)"
+}
+
+# configuration
+config_generate_ssh_key()
+{
+  echo "Configuring ssh..."
+
+  read -p "Please enter email address : " email
+  ssh-keygen -t ed25519 -C "$email"
+  eval "$(ssh-agent -s)"
+  ssh-add ~/.ssh/id_ed25519
+  echo "your public key: "$(cat ~/.ssh/id_ed25519.pub)
+
+  echo "Ssh have been configured for you :)"
+}
+
+config_git()
+{
+  echo "Configuring git..."
+
+  read -p "Please enter your email address : " email
+  read -p "Please enter your name : " name
+
+  git config --global init.defaultBranch master
+  git config --global user.email "$email"
+  git config --global user.name "$name"
+
+  echo "Git have been configured for you :)"
+}
+
+config_mysql()
+{
+  echo "Configuring mysql..."
+  # todo - set root password
+  echo "Mysql have been configured for you :)"
+}
+
+config_bash_aliases()
+{
+  echo "Configuring bash aliases..."
+  # todo - add bash aliases
+  echo "Bash aliases have been configured for you :)"
+}
+
+config_nginx_virtual_host()
+{
+  echo "Configuring nginx virtual host..."
+  # todo - add nginx virtual host
+  echo "Nginx virtual host have been configured for you :)"
+}
+
+config_mpv_subtitle()
+{
+  echo "Configuring nginx virtual host..."
+  # todo - add script for automatic subtitle download
+  echo "Nginx virtual host have been configured for you :)"
 }
 
 init
