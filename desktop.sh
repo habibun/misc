@@ -28,29 +28,30 @@ select_packages()
 {
   echo "Please confirm package for installation..."
 
-  confirm "install_gnome_tweak_tool->(y|n)" "install_gnome_tweak_tool"
-  confirm "install_vim->(y|n)" "install_vim"
-  confirm "install_openssh_server->(y|n)" "install_openssh_server"
-  confirm "install_git->(y|n)" "install_git"
-  confirm "install_composer->(y|n)" "install_composer"
-  confirm "install_nginx->(y|n)" "install_nginx"
-  confirm "install_php_fpm->(y|n)" "install_php_fpm"
-  confirm "install_symfony_php_extension->(y|n)" "install_symfony_php_extension"
-  confirm "install_symfony->(y|n)" "install_symfony"
-  confirm "install_codesniffer->(y|n)" "install_codesniffer"
-  confirm "install_php_cs_fixer->(y|n)" "install_php_cs_fixer"
-  confirm "install_virtualbox->(y|n)" "install_virtualbox"
-  confirm "install_nvm->(y|n)" "install_nvm"
-  confirm "install_phpstorm->(y|n)" "install_phpstorm"
-  confirm "install_datagrip->(y|n)" "install_datagrip"
-  confirm "install_postman->(y|n)" "install_postman"
-  confirm "install_skype->(y|n)" "install_skype"
-  confirm "install_mysql_server->(y|n)" "install_mysql_server"
-  confirm "install_docker->(y|n)" "install_docker"
-  confirm "install_mpv->(y|n)" "install_mpv"
-  confirm "install_google_chrome->(y|n)" "install_google_chrome"
-  confirm "install_chrome_gnome_shell->(y|n)" "install_chrome_gnome_shell"
-  confirm "install_slack->(y|n)" "install_slack"
+#  confirm "install_gnome_tweak_tool->(y|n)" "install_gnome_tweak_tool"
+#  confirm "install_vim->(y|n)" "install_vim"
+#  confirm "install_openssh_server->(y|n)" "install_openssh_server"
+#  confirm "install_git->(y|n)" "install_git"
+#  confirm "install_composer->(y|n)" "install_composer"
+#  confirm "install_nginx->(y|n)" "install_nginx"
+#  confirm "install_php_fpm->(y|n)" "install_php_fpm"
+#  confirm "install_symfony_php_extension->(y|n)" "install_symfony_php_extension"
+#  confirm "install_symfony->(y|n)" "install_symfony"
+#  confirm "install_codesniffer->(y|n)" "install_codesniffer"
+#  confirm "install_php_cs_fixer->(y|n)" "install_php_cs_fixer"
+#  confirm "install_virtualbox->(y|n)" "install_virtualbox"
+#  confirm "install_nvm->(y|n)" "install_nvm"
+#  confirm "install_phpstorm->(y|n)" "install_phpstorm"
+#  confirm "install_datagrip->(y|n)" "install_datagrip"
+#  confirm "install_postman->(y|n)" "install_postman"
+#  confirm "install_skype->(y|n)" "install_skype"
+#  confirm "install_mysql_server->(y|n)" "install_mysql_server"
+#  confirm "install_docker->(y|n)" "install_docker"
+#  confirm "install_mpv->(y|n)" "install_mpv"
+#  confirm "install_google_chrome->(y|n)" "install_google_chrome"
+#  confirm "install_chrome_gnome_shell->(y|n)" "install_chrome_gnome_shell"
+#  confirm "install_slack->(y|n)" "install_slack"
+  confirm "install_team_viewer->(y|n)" "install_team_viewer"
 
   echo "Package confirmation done :)"
 }
@@ -78,6 +79,8 @@ install_configuration()
   config_generate_ssh_key
   config_git
   config_mysql
+  config_bash_aliases
+  config_nginx_virtual_host
 
   echo "Configuration have been installed for you :)"
 }
@@ -346,7 +349,6 @@ install_mysql_server()
   echo "Installing mysql server..."
 
   sudo apt-get install -y mysql-server
-  mysql -uroot -e 'USE mysql; UPDATE user SET plugin="mysql_native_password" WHERE User="root"; FLUSH PRIVILEGES;'
 
   echo "Mysql server have been installed for you :)"
 }
@@ -355,7 +357,6 @@ install_google_chrome()
 {
   echo "Installing google chrome..."
 
-  ## Google Chrome
   wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
   sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
   sudo apt-get update
@@ -377,7 +378,11 @@ install_team_viewer()
 {
   echo "Installing team viewer..."
 
-  sudo apt-get install -y chrome-gnome-shell
+  wget https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc
+  sudo apt-key add TeamViewer2017.asc
+  sudo sh -c 'echo "deb http://linux.teamviewer.com/deb stable main" >> /etc/apt/sources.list.d/teamviewer.list'
+  sudo apt update
+  sudo apt install teamviewer
 
   echo "Team viewer have been installed for you :)"
 }
@@ -413,7 +418,10 @@ config_git()
 config_mysql()
 {
   echo "Configuring mysql..."
-  # todo - set root password
+
+  mysql -uroot -e 'USE mysql; UPDATE user SET plugin="mysql_native_password" WHERE User="root"; FLUSH PRIVILEGES;'
+  sudo mysql_secure_installation
+
   echo "Mysql have been configured for you :)"
 }
 
@@ -433,9 +441,26 @@ config_nginx_virtual_host()
 
 config_mpv_subtitle()
 {
-  echo "Configuring nginx virtual host..."
-  # todo - add script for automatic subtitle download
-  echo "Nginx virtual host have been configured for you :)"
+  echo "Configuring mpv subtitle..."
+
+  mkdir -p ~/.config/mpv/scripts
+  autosub_lua=~/.config/mpv/scripts/autosub.lua
+  if [ ! -f $autosub_lua ]; then
+    wget -O $autosub_lua https://raw.githubusercontent.com/davidde/mpv-autosub/master/autosub.lua
+  fi
+
+  # replace language to bangla
+  sed -i 's/'Dutch.*dut'/'Bangla', 'bn', 'ben'/g' $autosub_lua
+
+  sudo apt-get install python-pip
+  sudo pip install subliminal
+
+  # update subliminal path
+  subliminal_old_path="/opt/anaconda3/bin/subliminal"
+  subliminal_new_path=$(which subliminal)
+  sed -i "s|$subliminal_old_path|$subliminal_new_path|g" $autosub_lua
+
+  echo "Mpv subtitle have been configured for you :)"
 }
 
 init

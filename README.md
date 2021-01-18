@@ -7,4 +7,4 @@ wget: `bash <(wget -qO- https://raw.githubusercontent.com/habibun/ubuntu-setup/m
 
 curl: `bash <(curl -s https://raw.githubusercontent.com/habibun/ubuntu-setup/main/desktop.sh)`
 
-execute specific function: `curl -s https://raw.githubusercontent.com/habibun/ubuntu-setup/main/desktop.sh | bash /dev/stdin function_name`
+single function: `curl -s https://raw.githubusercontent.com/habibun/ubuntu-setup/main/desktop.sh | bash /dev/stdin function_name`
