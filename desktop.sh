@@ -428,7 +428,27 @@ config_mysql()
 config_bash_aliases()
 {
   echo "Configuring bash aliases..."
-  # todo - add bash aliases
+
+  alias_path=~/.bash_aliases
+  if [[ ! -e $alias_path ]]; then
+    touch $alias_path
+  fi
+
+  # git
+  gs="alias gs=\"git status\""
+  gac="alias gac=\"git add . && git commit -m\""
+  gpo="alias gpo='git push origin \"\$(git symbolic-ref --short HEAD)\"'"
+  glo="alias glo='git pull origin \"\$(git symbolic-ref --short HEAD)\"'"
+  gcb="alias gcb=\"git checkout -b\""
+  gl="alias glo=\"git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit\""
+
+  grep -qxF "$gs" $alias_path || echo "$gs" >> $alias_path
+  grep -qxF "$gac" $alias_path || echo "$gac" >> $alias_path
+  grep -qxF "$gpo" $alias_path || echo "$gpo" >> $alias_path
+  grep -qxF "$glo" $alias_path || echo "$glo" >> $alias_path
+  grep -qxF "$gcb" $alias_path || echo "$gcb" >> $alias_path
+  grep -qxF "$gl" $alias_path || echo "$gl" >> $alias_path
+
   echo "Bash aliases have been configured for you :)"
 }
 
