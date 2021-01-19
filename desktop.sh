@@ -18,6 +18,43 @@ init()
   install_configuration
 }
 
+# utility
+is_package_installed()
+{
+  if command -v $1 &> /dev/null
+  then
+    echo "$1 is already installed";
+    return 0
+  else
+    echo "Installing $1..."
+    return 1
+  fi
+}
+
+is_file_exists()
+{
+  if [ -e $1 ]
+  then
+      return 0
+  else
+      return 1
+  fi
+}
+
+confirm(){
+    read -p `echo "$1"` yn
+    case $yn in [Yy]* )
+    flag["$2"]=true;
+    esac
+}
+
+confirm_immediate(){
+    read -p `echo "$1"` yn
+    case $yn in [Yy]* )
+    eval $2
+    esac
+}
+
 # main function
 execute_function()
 {
@@ -558,43 +595,6 @@ config_mpv_subtitle()
   sed -i "s|$subliminal_old_path|$subliminal_new_path|g" $autosub_lua
 
   echo "Mpv subtitle have been configured for you :)"
-}
-
-# utility
-is_package_installed()
-{
-  if command -v $1 &> /dev/null
-  then
-    echo "$1 is already installed";
-    return 0
-  else
-    echo "Installing $1..."
-    return 1
-  fi
-}
-
-is_file_exists()
-{
-  if [ -e $1 ]
-  then
-      return 0
-  else
-      return 1
-  fi
-}
-
-confirm(){
-    read -p `echo "$1"` yn
-    case $yn in [Yy]* )
-    flag["$2"]=true;
-    esac
-}
-
-confirm_immediate(){
-    read -p `echo "$1"` yn
-    case $yn in [Yy]* )
-    eval $2
-    esac
 }
 
 init
