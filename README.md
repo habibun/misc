@@ -14,3 +14,5 @@ single function: `curl -s https://raw.githubusercontent.com/habibun/ubuntu-setup
 curl -sL https://raw.githubusercontent.com/habibun/ubuntu-setup/main/desktop.sh | sudo bash -
 
 curl https://raw.githubusercontent.com/habibun/ubuntu-setup/main/desktop.sh | sudo bash
+
+`sudo su -c "bash <(wget -qO- https://raw.githubusercontent.com/habibun/ubuntu-setup/main/desktop.sh)" root`
