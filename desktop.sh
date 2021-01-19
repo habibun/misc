@@ -59,7 +59,7 @@ confirm_immediate(){
 # main function
 execute_function()
 {
-  if [ "$FUNCTION_NAME" ]; then
+  if [ $FUNCTION_NAME ]; then
       type $FUNCTION_NAME &>/dev/null && eval $FUNCTION_NAME || echo "function $FUNCTION_NAME does not exist."
     exit 1
   fi
