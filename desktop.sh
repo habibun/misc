@@ -7,7 +7,7 @@ LOGGED_USER=$(logname)
 ACTIVE_USER=$USER
 TMP_DIR=/tmp
 CODE_NAME=$(lsb_release -csu 2> /dev/null || lsb_release -cs)
-FUNCTION_NAME=$1
+cd $TMP_DIR
 
 # init
 init()
@@ -58,8 +58,8 @@ confirm_immediate(){
 # main function
 execute_function()
 {
-if [ "$FUNCTION_NAME" ]; then
-    type $FUNCTION_NAME &>/dev/null && eval $FUNCTION_NAME || echo "function $FUNCTION_NAME does not exist."
+if [ "$1" ]; then
+    type $1 &>/dev/null && eval $1 || echo "function $1 does not exist."
   exit 1
 fi
 }
@@ -100,7 +100,6 @@ install_packages()
 {
   echo "This can take a while. Please be patient..."
 
-  cd $TMP_DIR
   sudo apt-get update && sudo apt-get -y upgrade
   for flagkey in "${!flag[@]}"; do
     if (${flag[$flagkey]} == true)
