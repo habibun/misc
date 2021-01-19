@@ -56,7 +56,6 @@ confirm_immediate(){
     esac
 }
 
-# main function
 particular_function()
 {
   if type $FUNCTION_NAME &>/dev/null
