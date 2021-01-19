@@ -13,7 +13,7 @@ cd $TMP_DIR
 # init
 init()
 {
-  execute_function
+  particular_function
   select_packages
   install_packages
   install_configuration
@@ -57,12 +57,15 @@ confirm_immediate(){
 }
 
 # main function
-execute_function()
+particular_function()
 {
-  if [ $FUNCTION_NAME ]; then
-      type $FUNCTION_NAME &>/dev/null && eval $FUNCTION_NAME || echo "function $FUNCTION_NAME does not exist."
-    exit 1
+  if type $FUNCTION_NAME &>/dev/null
+  then
+     echo $(type $FUNCTION_NAME)
+     else
+       echo "Function $FUNCTION_NAME does not exist."
   fi
+  exit 1
 }
 
 select_packages()
