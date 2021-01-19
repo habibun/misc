@@ -435,7 +435,59 @@ config_bash_aliases()
 config_nginx_virtual_host()
 {
   echo "Configuring nginx virtual host..."
-  # todo - add nginx virtual host
+
+  NGINX_VHOSTS_DIR='/etc/nginx/conf.d'
+  WEB_ROOT_DIR="$LOGGED_USER_HOME/Projects"
+  read -p "Enter domain name : " domain
+  mkdir -p $WEB_ROOT_DIR
+
+  vhost_file=$NGINX_VHOSTS_DIR/$domain-vhost.conf
+  test -f $vhost_file || sudo touch $vhost_file
+  el="$domain"_error
+  ac="$domain"_access
+
+  # Create nginx config file
+
+cat <<EOT >> $vhost_file
+server {
+    server_name $domain.local www.$domain.local;
+    root $WEB_ROOT_DIR/$domain/public;
+
+    location / {
+        try_files \$uri /index.php\$is_args\$args;
+    }
+
+    location ~ ^/index\.php(/|$) {
+        fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+        fastcgi_split_path_info ^(.+\.php)(/.*)$;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME \$realpath_root\$fastcgi_script_name;
+        fastcgi_param DOCUMENT_ROOT \$realpath_root;
+        internal;
+    }
+
+    location ~ \.php$ {
+        return 404;
+    }
+
+    error_log /var/log/nginx/$el.log;
+    access_log /var/log/nginx/$ac.log;
+}
+EOT
+
+  hosts_line="127.0.0.1    $domain.local"
+  host_file="/etc/hosts"
+
+  www_conf_file="/etc/php/7.2/fpm/pool.d/www.conf"
+  w_c_old_val="www-data"
+  w_c_new_val="nginx"
+
+  grep -qxF "$hosts_line" $host_file || echo "$hosts_line" >> $host_file
+
+  sed -i -e 's/www-data/nginx/g' $www_conf_file
+
+  sudo service nginx restart
+
   echo "Nginx virtual host have been configured for you :)"
 }
 
