@@ -1,8 +1,10 @@
 #!/bin/bash
+# based on ubuntu 18.04
 
 declare -A flag
 LOGGED_USER_HOME=$(eval echo ~${SUDO_USER})
-LOGGED_USER=$USER
+LOGGED_USER=$(logname)
+ACTIVE_USER=$USER
 TMP_DIR=/tmp
 CODE_NAME=$(lsb_release -csu 2> /dev/null || lsb_release -cs)
 FUNCTION_NAME=$1
@@ -19,7 +21,6 @@ init()
 # utility
 is_package_installed()
 {
-  echo argument $1
   if command -v $1 &> /dev/null
   then
     echo "$1 is already installed";
@@ -30,10 +31,27 @@ is_package_installed()
   fi
 }
 
+is_file_exists()
+{
+  if [ -e $1 ]
+  then
+      return 0
+  else
+      return 1
+  fi
+}
+
 confirm(){
     read -p `echo "$1"` yn
     case $yn in [Yy]* )
     flag["$2"]=true;
+    esac
+}
+
+confirm_immediate(){
+    read -p `echo "$1"` yn
+    case $yn in [Yy]* )
+    eval $2
     esac
 }
 
@@ -98,12 +116,12 @@ install_configuration()
 {
   echo "Installing configuration..."
 
-  config_generate_ssh_key
-  config_git
-  config_mysql
-  config_bash_aliases
-  config_nginx_virtual_host
-  config_mpv_subtitle
+  confirm_immediate "config_generate_ssh_key->(y|n)" "config_generate_ssh_key"
+  confirm_immediate "config_git->(y|n)" "config_git"
+  confirm_immediate "config_mysql->(y|n)" "config_mysql"
+  confirm_immediate "config_bash_aliases->(y|n)" "config_bash_aliases"
+  confirm_immediate "config_nginx_virtual_host->(y|n)" "config_nginx_virtual_host"
+  confirm_immediate "config_mpv_subtitle->(y|n)" "config_mpv_subtitle"
 
   echo "Configuration have been installed for you :)"
 }
@@ -111,7 +129,7 @@ install_configuration()
 # installation
 install_openssh_server()
 {
-  echo "Installing openssh server..."
+  if is_package_installed openssh-server ; then return 1; fi
 
   sudo apt-get install -y openssh-server
 
@@ -120,7 +138,7 @@ install_openssh_server()
 
 install_gnome_tweak_tool()
 {
-  echo "Installing gnome tweak tool..."
+  if is_package_installed gnome-tweak-tool ; then return 1; fi
 
   sudo apt-get install -y gnome-tweak-tool
 
@@ -129,7 +147,7 @@ install_gnome_tweak_tool()
 
 install_vim()
 {
-  echo "Installing vim..."
+  if is_package_installed vim ; then return 1; fi
 
   sudo apt-get install -y vim
 
@@ -138,7 +156,7 @@ install_vim()
 
 install_php_fpm()
 {
-  echo "Installing php7.2-fpm..."
+  if is_package_installed php7.2-fpm ; then return 1; fi
 
   sudo apt-get install -y php7.2-fpm
 
@@ -147,7 +165,7 @@ install_php_fpm()
 
 install_codesniffer()
 {
-  echo "Installing codesniffer..."
+  if is_package_installed phpcs ; then return 1; fi
 
   wget https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
   wget https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar
@@ -163,7 +181,7 @@ install_codesniffer()
 
 install_php_cs_fixer()
 {
-  echo "Installing php cs fixer..."
+  if is_package_installed php-cs-fixer ; then return 1; fi
 
   wget https://cs.symfony.com/download/php-cs-fixer-v2.phar -O php-cs-fixer
   chmod a+x php-cs-fixer
@@ -187,7 +205,8 @@ install_symfony_php_extension()
 
 install_nginx()
 {
-  echo "Installing nginx..."
+  if is_package_installed nginx ; then return 1; fi
+
   s1="deb [arch=amd64] https://nginx.org/packages/ubuntu/ $CODE_NAME nginx";
   s2="deb-src https://nginx.org/packages/ubuntu/ $CODE_NAME nginx";
 
@@ -204,7 +223,7 @@ install_nginx()
 
 install_git()
 {
-  echo "Installing git..."
+  if is_package_installed git ; then return 1; fi
 
   add-apt-repository -y ppa:git-core/ppa
   sudo apt update
@@ -228,7 +247,7 @@ install_symfony()
 
 install_composer()
 {
-  echo "Installing composer..."
+  if is_package_installed composer ; then return 1; fi
 
   EXPECTED_CHECKSUM="$(wget -q -O - https://composer.github.io/installer.sig)"
   php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -252,10 +271,11 @@ install_composer()
 
 install_virtualbox()
 {
-  echo "Installing virtualbox..."
-
   version=$(curl http://download.virtualbox.org/virtualbox/LATEST-STABLE.TXT)
   version="$(echo $version| cut -d'.' -f1).$(echo $version| cut -d'.' -f2)"
+
+  if is_package_installed virtualbox-$version ; then return 1; fi
+
   source="deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian $CODE_NAME contrib";
   grep -qxF "$source" /etc/apt/sources.list || echo "$source" >> /etc/apt/sources.list
   wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -
@@ -281,7 +301,7 @@ install_nvm()
 
 install_phpstorm()
 {
-  echo "Installing phpstorm..."
+  if is_package_installed phpstorm ; then return 1; fi
 
   sudo snap install phpstorm --classic
 
@@ -290,7 +310,7 @@ install_phpstorm()
 
 install_datagrip()
 {
-  echo "Installing datagrip..."
+  if is_package_installed datagrip ; then return 1; fi
 
   sudo snap install datagrip --classic
 
@@ -299,7 +319,7 @@ install_datagrip()
 
 install_postman()
 {
-  echo "Installing postman..."
+  if is_package_installed postman ; then return 1; fi
 
   sudo snap install postman
 
@@ -308,7 +328,7 @@ install_postman()
 
 install_skype()
 {
-  echo "Installing skype..."
+  if is_package_installed skype ; then return 1; fi
 
   sudo snap install skype --classic
 
@@ -317,7 +337,7 @@ install_skype()
 
 install_slack()
 {
-  echo "Installing slack..."
+  if is_package_installed slack ; then return 1; fi
 
   sudo snap install slack --classic
 
@@ -326,7 +346,7 @@ install_slack()
 
 install_mpv()
 {
-  echo "Installing mpv..."
+  if is_package_installed mpv ; then return 1; fi
 
   sudo add-apt-repository -y ppa:mc3man/mpv-tests
   sudo apt-get update
@@ -337,7 +357,8 @@ install_mpv()
 
 install_docker()
 {
-  echo "Installing docker..."
+  if is_package_installed docker ; then return 1; fi
+
   sudo apt-get install -y \
     apt-transport-https \
     ca-certificates \
@@ -362,7 +383,7 @@ install_docker()
 
 install_mysql_server()
 {
-  echo "Installing mysql server..."
+  if is_package_installed mysql-server ; then return 1; fi
 
   sudo apt-get install -y mysql-server
 
@@ -371,7 +392,7 @@ install_mysql_server()
 
 install_google_chrome()
 {
-  echo "Installing google chrome..."
+  if is_package_installed google-chrome-stable ; then return 1; fi
 
   wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
   sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
@@ -383,7 +404,7 @@ install_google_chrome()
 
 install_chrome_gnome_shell()
 {
-  echo "Installing chrome gnome shell..."
+  if is_package_installed chrome-gnome-shell ; then return 1; fi
 
   sudo apt-get install -y chrome-gnome-shell
 
@@ -392,13 +413,13 @@ install_chrome_gnome_shell()
 
 install_team_viewer()
 {
-  echo "Installing team viewer..."
+  if is_package_installed teamviewer ; then return 1; fi
 
   wget https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc
   sudo apt-key add TeamViewer2017.asc
   sudo sh -c 'echo "deb http://linux.teamviewer.com/deb stable main" >> /etc/apt/sources.list.d/teamviewer.list'
   sudo apt update
-  sudo apt install teamviewer
+  sudo apt install -y teamviewer
 
   echo "Team viewer have been installed for you :)"
 }
@@ -406,23 +427,35 @@ install_team_viewer()
 # configuration
 config_generate_ssh_key()
 {
+  public_key_path=$LOGGED_USER_HOME/.ssh/id_ed25519.pub
+  if is_file_exists $public_key_path ;
+    then
+      echo "SSH key already exists"
+      return 1;
+  fi
+
   echo "Configuring ssh..."
 
-  read -p "Please enter email address : " email
-  ssh-keygen -t ed25519 -C "$email"
+  read -p "Please enter email address for ssh configuration: " email
+  sudo -H -u $LOGGED_USER bash -c 'ssh-keygen -t ed25519 -C "$email"'
   eval "$(ssh-agent -s)"
-  ssh-add ~/.ssh/id_ed25519
-  echo "your public key: "$(cat ~/.ssh/id_ed25519.pub)
+  ssh-add $LOGGED_USER_HOME/.ssh/id_ed25519
+  echo "your public key: "$(cat $public_key_path)
 
   echo "Ssh have been configured for you :)"
 }
 
 config_git()
 {
+  if [[ $(git config --get user.email) ]]; then
+      echo "Git already configured"
+      return 1;
+  fi
+
   echo "Configuring git..."
 
-  read -p "Please enter your email address : " email
-  read -p "Please enter your name : " name
+  read -p "Please enter your email address for git configuration: " email
+  read -p "Please enter your name for git configuration: " name
 
   git config --global init.defaultBranch master
   git config --global user.email "$email"
@@ -443,12 +476,15 @@ config_mysql()
 
 config_bash_aliases()
 {
-  echo "Configuring bash aliases..."
-
-  alias_path=~/.bash_aliases
+  alias_path=$LOGGED_USER_HOME/.bash_aliases
   if [[ ! -e $alias_path ]]; then
     touch $alias_path
+    else
+      echo "Bash aliases already added"
+      return 1;
   fi
+
+  echo "Configuring bash aliases..."
 
   # git
   gs="alias gs=\"git status\""
@@ -478,6 +514,12 @@ config_nginx_virtual_host()
   mkdir -p $WEB_ROOT_DIR
 
   vhost_file=$NGINX_VHOSTS_DIR/$domain-vhost.conf
+  if is_file_exists $vhost_file ;
+  then
+    echo "Virtual host already exists for $domain"
+    return 1;
+  fi
+
   test -f $vhost_file || sudo touch $vhost_file
   el="$domain"_error
   ac="$domain"_access
@@ -527,10 +569,17 @@ EOT
 
 config_mpv_subtitle()
 {
+  mkdir -p $LOGGED_USER_HOME/.config/mpv/scripts
+  autosub_lua=$LOGGED_USER_HOME/.config/mpv/scripts/autosub.lua
+
+  if is_file_exists $autosub_lua ;
+  then
+    echo "MPV automatic subtitle already configured"
+    return 1;
+  fi
+
   echo "Configuring mpv subtitle..."
 
-  mkdir -p ~/.config/mpv/scripts
-  autosub_lua=~/.config/mpv/scripts/autosub.lua
   if [ ! -f $autosub_lua ]; then
     wget -O $autosub_lua https://raw.githubusercontent.com/davidde/mpv-autosub/master/autosub.lua
   fi
