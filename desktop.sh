@@ -7,7 +7,7 @@ TMP_DIR=/tmp
 CODE_NAME=$(lsb_release -csu 2> /dev/null || lsb_release -cs)
 FUNCTION_NAME=$1
 
-# utility
+# init
 init()
 {
   execute_function
@@ -16,6 +16,28 @@ init()
   install_configuration
 }
 
+# utility
+is_package_installed()
+{
+  echo argument $1
+  if command -v $1 &> /dev/null
+  then
+    echo "$1 is already installed";
+    return 0
+  else
+    echo "Installing $1..."
+    return 1
+  fi
+}
+
+confirm(){
+    read -p `echo "$1"` yn
+    case $yn in [Yy]* )
+    flag["$2"]=true;
+    esac
+}
+
+# main function
 execute_function()
 {
 if [ "$FUNCTION_NAME" ]; then
@@ -28,29 +50,29 @@ select_packages()
 {
   echo "Please confirm package for installation..."
 
-#  confirm "install_gnome_tweak_tool->(y|n)" "install_gnome_tweak_tool"
-#  confirm "install_vim->(y|n)" "install_vim"
-#  confirm "install_openssh_server->(y|n)" "install_openssh_server"
-#  confirm "install_git->(y|n)" "install_git"
-#  confirm "install_composer->(y|n)" "install_composer"
-#  confirm "install_nginx->(y|n)" "install_nginx"
-#  confirm "install_php_fpm->(y|n)" "install_php_fpm"
-#  confirm "install_symfony_php_extension->(y|n)" "install_symfony_php_extension"
-#  confirm "install_symfony->(y|n)" "install_symfony"
-#  confirm "install_codesniffer->(y|n)" "install_codesniffer"
-#  confirm "install_php_cs_fixer->(y|n)" "install_php_cs_fixer"
-#  confirm "install_virtualbox->(y|n)" "install_virtualbox"
-#  confirm "install_nvm->(y|n)" "install_nvm"
-#  confirm "install_phpstorm->(y|n)" "install_phpstorm"
-#  confirm "install_datagrip->(y|n)" "install_datagrip"
-#  confirm "install_postman->(y|n)" "install_postman"
-#  confirm "install_skype->(y|n)" "install_skype"
-#  confirm "install_mysql_server->(y|n)" "install_mysql_server"
-#  confirm "install_docker->(y|n)" "install_docker"
-#  confirm "install_mpv->(y|n)" "install_mpv"
-#  confirm "install_google_chrome->(y|n)" "install_google_chrome"
-#  confirm "install_chrome_gnome_shell->(y|n)" "install_chrome_gnome_shell"
-#  confirm "install_slack->(y|n)" "install_slack"
+  confirm "install_gnome_tweak_tool->(y|n)" "install_gnome_tweak_tool"
+  confirm "install_vim->(y|n)" "install_vim"
+  confirm "install_openssh_server->(y|n)" "install_openssh_server"
+  confirm "install_git->(y|n)" "install_git"
+  confirm "install_composer->(y|n)" "install_composer"
+  confirm "install_nginx->(y|n)" "install_nginx"
+  confirm "install_php_fpm->(y|n)" "install_php_fpm"
+  confirm "install_symfony_php_extension->(y|n)" "install_symfony_php_extension"
+  confirm "install_symfony->(y|n)" "install_symfony"
+  confirm "install_codesniffer->(y|n)" "install_codesniffer"
+  confirm "install_php_cs_fixer->(y|n)" "install_php_cs_fixer"
+  confirm "install_virtualbox->(y|n)" "install_virtualbox"
+  confirm "install_nvm->(y|n)" "install_nvm"
+  confirm "install_phpstorm->(y|n)" "install_phpstorm"
+  confirm "install_datagrip->(y|n)" "install_datagrip"
+  confirm "install_postman->(y|n)" "install_postman"
+  confirm "install_skype->(y|n)" "install_skype"
+  confirm "install_mysql_server->(y|n)" "install_mysql_server"
+  confirm "install_docker->(y|n)" "install_docker"
+  confirm "install_mpv->(y|n)" "install_mpv"
+  confirm "install_google_chrome->(y|n)" "install_google_chrome"
+  confirm "install_chrome_gnome_shell->(y|n)" "install_chrome_gnome_shell"
+  confirm "install_slack->(y|n)" "install_slack"
   confirm "install_team_viewer->(y|n)" "install_team_viewer"
 
   echo "Package confirmation done :)"
@@ -61,7 +83,7 @@ install_packages()
   echo "This can take a while. Please be patient..."
 
   cd $TMP_DIR
-  sudo apt-get update && sudo apt-get upgrade
+  sudo apt-get update && sudo apt-get -y upgrade
   for flagkey in "${!flag[@]}"; do
     if (${flag[$flagkey]} == true)
     then
@@ -81,15 +103,9 @@ install_configuration()
   config_mysql
   config_bash_aliases
   config_nginx_virtual_host
+  config_mpv_subtitle
 
   echo "Configuration have been installed for you :)"
-}
-
-confirm(){
-    read -p `echo "$1"` yn
-    case $yn in [Yy]* )
-    flag["$2"]=true;
-    esac
 }
 
 # installation
@@ -199,7 +215,7 @@ install_git()
 
 install_symfony()
 {
-  echo "Installing symfony..."
+  if is_package_installed symfony ; then return 1; fi
 
   wget https://get.symfony.com/cli/installer -O - | bash
   mv ${USER_HOME}/.symfony/bin/symfony /usr/local/bin/symfony
@@ -252,7 +268,7 @@ install_virtualbox()
 
 install_nvm()
 {
-  echo "Installing NVM..."
+  if is_package_installed nvm ; then return 1; fi
 
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
   export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
@@ -465,8 +481,6 @@ config_nginx_virtual_host()
   test -f $vhost_file || sudo touch $vhost_file
   el="$domain"_error
   ac="$domain"_access
-
-  # Create nginx config file
 
 cat <<EOT >> $vhost_file
 server {
