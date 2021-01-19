@@ -66,8 +66,6 @@ particular_function()
   fi
 
   if [ ! -z $FUNCTION_NAME ]; then exit 1; fi
-
-
 }
 
 select_packages()
