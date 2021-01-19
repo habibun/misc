@@ -60,9 +60,9 @@ particular_function()
 {
   if type $FUNCTION_NAME &>/dev/null
   then
-     echo $(type $FUNCTION_NAME)
-     else
-       echo "Function $FUNCTION_NAME does not exist."
+    eval $FUNCTION_NAME
+  else
+    echo "Function $FUNCTION_NAME does not exist."
   fi
   exit 1
 }
