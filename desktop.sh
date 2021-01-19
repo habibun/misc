@@ -574,7 +574,7 @@ config_mpv_subtitle()
 
   if is_file_exists $autosub_lua ;
   then
-    echo "MPV automatic subtitle already configured"
+    echo "MPV automatic subtitle download already configured"
     return 1;
   fi
 
