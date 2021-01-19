@@ -64,7 +64,10 @@ particular_function()
   else
     echo "Function $FUNCTION_NAME does not exist."
   fi
-  exit 1
+
+  if [ ! -z $FUNCTION_NAME ]; then exit 1; fi
+
+
 }
 
 select_packages()
