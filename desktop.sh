@@ -263,9 +263,12 @@ install_composer()
       exit 1
   fi
 
+  sudo apt-get install -y zip\
+                          unzip
   php composer-setup.php --quiet
   RESULT=$?
   rm composer-setup.php
+  exit $RESULT
   mv composer.phar /usr/local/bin/composer
   chown -R $LOGGED_USER:$LOGGED_USER /usr/local/bin/composer
 
@@ -602,3 +605,5 @@ config_mpv_subtitle()
 }
 
 init
+
+# todo - xdebug
