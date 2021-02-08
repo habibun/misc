@@ -201,7 +201,8 @@ install_symfony_php_extension()
   sudo apt-get install -y  php7.2-xml\
                       php7.2-mbstring\
                       php7.2-intl\
-                      php7.2-mysql
+                      php7.2-mysql\
+                      php7.2-sqlite3
 
   echo "php extension have been installed for you :)"
 }
