@@ -2,13 +2,13 @@
 # based on ubuntu 20.04
 
 declare -A flag
-LOGGED_USER_HOME=$(eval echo ~${SUDO_USER})
+LOGGED_USER_HOME=$(eval echo ~"${SUDO_USER}")
 LOGGED_USER=$(logname)
 ACTIVE_USER=$USER
 TMP_DIR=/tmp
 CODE_NAME=$(lsb_release -csu 2> /dev/null || lsb_release -cs)
 FUNCTION_NAME=$1
-cd $TMP_DIR
+cd $TMP_DIR || exit
 
 # init
 init()
@@ -58,14 +58,14 @@ confirm_immediate(){
 
 particular_function()
 {
-  if type $FUNCTION_NAME &>/dev/null
+  if type "$FUNCTION_NAME" &>/dev/null
   then
-    eval $FUNCTION_NAME
+    eval "$FUNCTION_NAME"
   else
     echo "Function $FUNCTION_NAME does not exist."
   fi
 
-  if [ ! -z $FUNCTION_NAME ]; then exit 1; fi
+  if [ ! -z "$FUNCTION_NAME" ]; then exit 1; fi
 }
 
 select_packages()
@@ -92,6 +92,7 @@ select_packages()
   confirm "install_chrome_gnome_shell->(y|n)" "install_chrome_gnome_shell"
   confirm "install_slack->(y|n)" "install_slack"
   confirm "install_team_viewer->(y|n)" "install_team_viewer"
+  confirm "install_kazam->(y|n)" "install_kazam"
 
   echo "Package confirmation done :)"
 }
@@ -153,6 +154,15 @@ install_vim()
   echo "Vim have been installed for you :)"
 }
 
+install_kazam()
+{
+  if is_package_installed kazam ; then return 1; fi
+
+  sudo apt-get install -y kazam
+
+  echo "Kazam have been installed for you :)"
+}
+
 install_php_fpm()
 {
   if is_package_installed php7.4-fpm ; then return 1; fi
@@ -181,8 +191,8 @@ install_codesniffer()
   chmod a+x phpcbf
   mv phpcs.phar /usr/local/bin/phpcs
   mv phpcbf.phar /usr/local/bin/phpcbf
-  chown -R $LOGGED_USER:$LOGGED_USER /usr/local/bin/phpcs
-  chown -R $LOGGED_USER:$LOGGED_USER /usr/local/bin/phpcbf
+  chown -R "$LOGGED_USER":"$LOGGED_USER" /usr/local/bin/phpcs
+  chown -R "$LOGGED_USER":"$LOGGED_USER" /usr/local/bin/phpcbf
 
   echo "Codesniffer have been installed for you :)"
 }
