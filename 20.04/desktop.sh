@@ -93,6 +93,7 @@ select_packages()
   confirm "install_slack->(y|n)" "install_slack"
   confirm "install_team_viewer->(y|n)" "install_team_viewer"
   confirm "install_kazam->(y|n)" "install_kazam"
+  confirm "install_yarn->(y|n)" "install_yarn"
 
   echo "Package confirmation done :)"
 }
@@ -152,6 +153,15 @@ install_vim()
   sudo apt-get install -y vim
 
   echo "Vim have been installed for you :)"
+}
+
+install_yarn()
+{
+  if is_package_installed yarn ; then return 1; fi
+
+  npm install --global yarn
+
+  echo "Yarn have been installed for you :)"
 }
 
 install_kazam()
