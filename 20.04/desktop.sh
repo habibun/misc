@@ -159,7 +159,9 @@ install_yarn()
 {
   if is_package_installed yarn ; then return 1; fi
 
-  npm install --global yarn
+	curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+  echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+	sudo apt-get update && sudo apt-get install --no-install-recommends yarn
 
   echo "Yarn have been installed for you :)"
 }
