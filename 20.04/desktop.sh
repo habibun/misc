@@ -442,6 +442,15 @@ install_team_viewer()
   echo "Team viewer have been installed for you :)"
 }
 
+install_any_desk()
+{
+  if is_package_installed anydesk ; then return 1; fi
+
+  //todo - check website
+
+  echo "AnyDesk have been installed for you :)"
+}
+
 # configuration
 config_generate_ssh_key()
 {
