@@ -10,4 +10,4 @@
 
 ### Misc
 `command & disown` # cmd should be started in an independent terminal  
-`truncate -s 0 file` # Empty log files
+`truncate -s 0 file` # empty log files
