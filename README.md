@@ -3,3 +3,4 @@
 `du -hs /path` # size of a directory   
 `du -hs /path/*` # size of a all directory inside   
 `du -hs /path/* | sort -rh` # size of a all directory inside and sort by size desc   
+`command & disown` # cmd should be started in an independent terminal
