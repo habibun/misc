@@ -9,4 +9,5 @@
 `du -hs /path/* | sort -rh` # size of a all directory inside and sort by size desc  
 
 ### Misc
-`command & disown` # cmd should be started in an independent terminal
+`command & disown` # cmd should be started in an independent terminal  
+`truncate -s 0 file` # Empty log files
