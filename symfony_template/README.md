@@ -17,5 +17,5 @@ Read [topic Docs](xxx)
 The code is licensed under the [MIT License][license]
 
 
-[repo_url]: https://github.com/habibun/symfony-template/tree/repo-name
-[license]: https://github.com/habibun/symfony-template/blob/main/LICENSE
+[repo_url]: https://github.com/habibun/repo-name
+[license]: https://github.com/habibun/repo-name/blob/main/LICENSE
