@@ -11,3 +11,7 @@
 ### Misc
 `command & disown` # cmd should be started in an independent terminal  
 `truncate -s 0 file` # empty log files
+
+### xdebug
+`sudo phpdismod xdebug` # disable xdebug
+`sudo phpenmod xdebug` # enable xdebug
