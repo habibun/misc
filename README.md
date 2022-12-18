@@ -13,5 +13,5 @@
 `truncate -s 0 file` # empty log files
 
 ### xdebug
-`sudo phpdismod xdebug` # disable xdebug
-`sudo phpenmod xdebug` # enable xdebug
+`sudo phpdismod xdebug` # disable xdebug  
+`sudo phpenmod xdebug` # enable xdebug  
