@@ -17,5 +17,5 @@ Read [topic Docs](xxx)
 The code is licensed under the [MIT License][license]
 
 
-[repo_url]: https://github.com/habibun/repo-name
+[repo_url]: https://github.com/habibun/tree/repo-name
 [license]: https://github.com/habibun/repo-name/blob/main/LICENSE
