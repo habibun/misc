@@ -9,13 +9,15 @@ Implements xxx in symfony
 
 Read [topic Docs](xxx)
 
+
 ### Resources  
-- [title](url)
+- [`title`](branch_url)
+  - [title](url)
 
 
 ### License
 The code is licensed under the [MIT License][license]
 
 
-[branch_url]: https://github.com/habibun/repo-name/tree/branch-name
 [license]: https://github.com/habibun/repo-name/blob/main/LICENSE
+[branch_url]: https://github.com/habibun/repo-name/tree/branch-name
