@@ -11,7 +11,7 @@ Read [topic Docs](xxx)
 
 
 ### Resources  
-- [`title`](branch_url)
+- [`branch_name`](branch_url)
   - [title](url)
 
 
