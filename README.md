@@ -1,5 +1,5 @@
-# Miscellaneous
 
+---
 ## Command
 
 ### Size   
@@ -11,3 +11,11 @@
 ### Misc
 `command & disown` # cmd should be started in an independent terminal  
 `truncate -s 0 file` # empty log files
+
+
+---
+## Links
+[Best-README-Template](https://github.com/othneildrew/Best-README-Template)  
+[Awesome README Awesome](https://github.com/matiassingers/awesome-readme)  
+[public-apis](https://github.com/public-apis/public-apis)  
+
