@@ -1,8 +1,8 @@
 # repo-name
 Implements xxx in symfony
 
-| Branch            | xxx Version | Symfony Version | PHP Version     |
-|-------------------|-------------|-----------------|-----------------|
+| Branch              | xxx Version | Symfony Version | PHP Version     |
+|---------------------|-------------|-----------------|-----------------|
 | [5.4.x][branch_url] | `x.x`       | `5.4.x`         | `8.0` or higher |
 | [4.4.x][branch_url] | `x.x`       | `4.4.x`         | `7.4` or higher |
 
