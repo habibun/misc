@@ -29,6 +29,7 @@ Miscellaneous
 
 ### File  
 `truncate -s 0 file` # empty log files  
+`unrar x -r file.rar` # unpack files
 
 ### Xdebug
 `sudo phpdismod xdebug` # disable xdebug  
