@@ -8,13 +8,6 @@ Miscellaneous
 ### [Script](script)
 
 
----
-## Useful Links
-[Best-README-Template](https://github.com/othneildrew/Best-README-Template)  
-[Awesome README Awesome](https://github.com/matiassingers/awesome-readme)  
-[public-apis](https://github.com/public-apis/public-apis)
-
-
 --- 
 ## Command
 
