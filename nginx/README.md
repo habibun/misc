@@ -1,7 +1,7 @@
 ## Nginx
 
----
-[Server Blocks](server-block)
+- [Server Blocks](server-block)
+
 
 ## Learn More
 
