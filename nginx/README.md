@@ -1,5 +1,4 @@
-# Ubuntu Setup Script
-A setup script for ubuntu
+## Ubuntu post-installation script
 
 ## Usage
 
