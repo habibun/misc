@@ -3,6 +3,7 @@
 ## Plugin
 - [Randomness](https://plugins.jetbrains.com/plugin/9836-randomness) :construction:
 - [CodeGeeX](https://plugins.jetbrains.com/plugin/20587-codegeex) :construction:
+- [PHPUnit Enhancement](https://plugins.jetbrains.com/plugin/9674-phpunit-enhancement)
 - [PHP Toolbox](https://plugins.jetbrains.com/plugin/8133-php-toolbox)
 - [Symfony Support](https://plugins.jetbrains.com/plugin/7219-symfony-support)
 - [AceJump](https://plugins.jetbrains.com/plugin/7086-acejump)
