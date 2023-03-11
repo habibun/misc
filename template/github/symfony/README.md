@@ -1,31 +1,29 @@
 ## About The Project
-[Symfony UX][topic] learning and practising resources, including some test projects.
-
+[xxx][topic] resources for learning and practicing.
 
 In this repository, every branch holds a separate example project except the main branch.  
-
 Please check the [projects](#projects) section for more details.
 
 
 ## Overview
-| Title                                | Branch          | Symfony Version | PHP Version | Inspired By                                      |
-|--------------------------------------|-----------------|-----------------|-------------|--------------------------------------------------|
-| [Symfony UX Chart.js][jakub-tobiasz] | `jakub-tobiasz` | `^5.4`          | `^8.1`      | [Discover Symfony UX][jakub-tobiasz-url-tooltip] |
+| Title                                | Branch          | Symfony Version | PHP Version | 
+|--------------------------------------|-----------------|-----------------|-------------|
+| [xxx][xxx_tooltip]                   | `jakub-tobiasz` | `^5.4`          | `^8.1`      |
 
 
 ## Projects
-<details><summary>Symfony UX Chart.js</summary>  
+<details><summary>xxx</summary>  
 <p>  
 
 <img
-src="https://user-images.githubusercontent.com/5810350/218063260-f11af1b3-7928-4ef5-832b-153befb8c1cb.png"
-alt="Symfony UX Chart"
+src="xxx"
+alt="xxx"
 width="80%"
 />
 
-**Project Description:** Discover Symfony UX components and enhance your front-end using Symfony UX Chart.js  
-**Project Link:** https://github.com/habibun/symfony-ux/tree/jakub-tobiasz  
-**Inspired By:** [Discover Symfony UX components and enhance your front-end][jakub-tobiasz-url]  
+**Code:** https://github.com/habibun/xxx/tree/xxx  
+**Resources:** 
+- [Discover Symfony UX components and enhance your front-end][jakub-tobiasz-url]  
 <br/>
 
 #### Installation
@@ -35,7 +33,6 @@ cd symfony-ux
 git checkout jakub-tobiasz
 git pull origin jakub-tobiasz
 symfony composer install
-symfony server:start
 ```
 
 </p>
@@ -43,11 +40,7 @@ symfony server:start
 
 
 ## Learn More
-- [Official Symfony UX Docs](https://ux.symfony.com/)
-- [Stimulus](https://stimulus.hotwired.dev/)
-- [How Symfony UX United Two Worlds](https://blog.alphpaca.io/how-symfony-ux-united-two-worlds-21a89fc04410)
-- [Render beautiful graphs with chart.js](https://ux.symfony.com/chartjs)
-- [Chart.js](https://www.chartjs.org/)
+- [xxx](xxx)
 
 
 ## License
@@ -55,10 +48,5 @@ Distributed under the MIT License. See **[LICENSE][license]** for more informati
 
 
 [//]: # (Links)
-[topic]: https://ux.symfony.com/
-[license]: https://github.com/habibun/symfony-ux/blob/main/LICENSE
-
-[//]: # (Symfony UX Chart.js)
-[jakub-tobiasz]: https://github.com/habibun/symfony-ux/tree/jakub-tobiasz
-[jakub-tobiasz-url]: https://blog.alphpaca.io/discover-symfony-ux-components-and-enhance-your-front-end-ffff3a7c0177
-[jakub-tobiasz-url-tooltip]: https://blog.alphpaca.io/discover-symfony-ux-components-and-enhance-your-front-end-ffff3a7c0177 "Discover Symfony UX components and enhance your front-end"
+[topic]: xxx
+[license]: https://github.com/habibun/xxx/blob/main/LICENSE
