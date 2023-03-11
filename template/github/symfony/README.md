@@ -8,7 +8,7 @@ Please check the [projects](#projects) section for more details.
 ## Overview
 | Title                                | Branch          | Symfony Version | PHP Version | 
 |--------------------------------------|-----------------|-----------------|-------------|
-| [xxx][xxx_tooltip]                   | `jakub-tobiasz` | `^5.4`          | `^8.1`      |
+| [xxx][xxx_tooltip]                   | `xxx`           | `^0.0`          | `^0.0`      |
 
 
 ## Projects
@@ -23,7 +23,7 @@ width="80%"
 
 **Code:** https://github.com/habibun/xxx/tree/xxx  
 **Resources:** 
-- [Discover Symfony UX components and enhance your front-end][jakub-tobiasz-url]  
+- [xxx_tile][xxx_url]  
 <br/>
 
 #### Installation
