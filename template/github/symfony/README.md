@@ -31,7 +31,6 @@ width="80%"
 git clone git@github.com:habibun/symfony-ux.git
 cd symfony-ux
 git checkout jakub-tobiasz
-git pull origin jakub-tobiasz
 symfony composer install
 ```
 
