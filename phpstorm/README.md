@@ -16,3 +16,4 @@
 - [String Manipulation](https://plugins.jetbrains.com/plugin/2162-string-manipulation)
 - [.env files support](https://plugins.jetbrains.com/plugin/9525--env-files-support)
 - [.ignore](https://plugins.jetbrains.com/plugin/7495--ignore)
+- [Shell Script](https://plugins.jetbrains.com/plugin/13122-shell-script)  
