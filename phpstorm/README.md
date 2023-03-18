@@ -1,9 +1,10 @@
 ## PhpStorm
 
 ## Plugin
-- [Atom Material Icons](https://plugins.jetbrains.com/plugin/10044-atom-material-icons) :construction:
-- [Randomness](https://plugins.jetbrains.com/plugin/9836-randomness) :construction:
-- [CodeGeeX](https://plugins.jetbrains.com/plugin/20587-codegeex) :construction:
+- [WakaTime](https://plugins.jetbrains.com/plugin/7425-wakatime) 🚧
+- [Atom Material Icons](https://plugins.jetbrains.com/plugin/10044-atom-material-icons) 🚧
+- [Randomness](https://plugins.jetbrains.com/plugin/9836-randomness) 🚧
+- [CodeGeeX](https://plugins.jetbrains.com/plugin/20587-codegeex) 🚧
 - [PHPUnit Enhancement](https://plugins.jetbrains.com/plugin/9674-phpunit-enhancement)
 - [PHP Toolbox](https://plugins.jetbrains.com/plugin/8133-php-toolbox)
 - [Symfony Support](https://plugins.jetbrains.com/plugin/7219-symfony-support)
