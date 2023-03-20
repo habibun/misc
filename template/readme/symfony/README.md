@@ -1,7 +1,6 @@
 ## About The Project
 [xxx][topic] resources for learning and practicing.
 
-In this repository, every branch holds a separate example project except the main branch.  
 Please check the [projects](#projects) section for more details.
 
 
@@ -35,6 +34,8 @@ symfony composer install
 ```
 
 </p>
+
+##
 </details>
 
 
