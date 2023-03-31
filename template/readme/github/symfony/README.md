@@ -23,10 +23,9 @@ width="50%"
 **Resources:**
  - [EasyAdmin! For an Awesomely Powerful Admin Area](https://symfonycasts.com/screencast/easyadminbundle)
 
-### Prerequisites
-- [Symfony CLI][symfony_cli], [PHP][php], [Composer][composer], [Git][git], [MySQL][mysql], [Node.js][node]
+##### Prerequisites: [Symfony CLI][symfony_cli], [PHP][php], [Composer][composer], [Git][git], [MySQL][mysql], [Docker][docker], [Docker Compose][docker_compose]
 
-### Installation
+#### Installation
 
 ```bash 
 # Clone the repository using the command
@@ -71,10 +70,9 @@ width="50%"
 - [EasyAdminBundle v1 for an Amazing Admin Interface](https://symfonycasts.com/screencast/easyadminbundle1)
 
 
-### Prerequisites
-[Symfony CLI][symfony_cli], [PHP][php], [Composer][composer], [Git][git], [MySQL][mysql]
+##### Prerequisites: [Symfony CLI][symfony_cli], [PHP][php], [Composer][composer], [Git][git], [MySQL][mysql], [Docker][docker], [Docker Compose][docker_compose]
 
-### Installation
+#### Installation
 
 ```bash 
 # Clone the repository using the command
