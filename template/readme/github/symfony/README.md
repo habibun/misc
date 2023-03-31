@@ -133,9 +133,12 @@ Distributed under the MIT License. See **[LICENSE][license]** for more informati
 [v2_tt]: https://github.com/habibun/easy-admin-bundle/tree/v2 "Simple application using EasyAdminBundle v2"
 [v2_makefile]: https://github.com/habibun/easy-admin-bundle/blob/v2/Makefile
 
+[//]: # (Prerequisites)
 [symfony_cli]: https://symfony.com/download
 [php]: https://www.php.net/
 [composer]: https://getcomposer.org/
 [git]: https://git-scm.com/
 [mysql]: https://www.mysql.com/
 [node]: https://nodejs.org/
+[docker]: https://www.docker.com/
+[docker_compose]: https://docs.docker.com/compose/
