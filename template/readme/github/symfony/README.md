@@ -1,5 +1,5 @@
 ## About The Project
-Implements [EasyAdminBundle][easy_admin_github] in [Symfony][symfony_website]
+Implements [EasyAdminBundle][easy_admin_github] in [Symfony][symfony]
 
 Please check the [projects](#projects) section for more details.
 
@@ -118,7 +118,7 @@ Distributed under the MIT License. See **[LICENSE][license]** for more informati
 
 [//]: # (Links)
 [license]: https://github.com/habibun/easy-admin-bundle/blob/main/LICENSE
-[symfony_website]: https://symfony.com/
+[symfony]: https://symfony.com/
 
 [easy_admin_github]: https://github.com/EasyCorp/EasyAdminBundle
 [easy_admin_docs]: https://symfony.com/bundles/EasyAdminBundle/current/index.html
