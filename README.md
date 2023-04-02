@@ -30,6 +30,30 @@ Miscellaneous
 `sudo phpdismod xdebug` # disable xdebug  
 `sudo phpenmod xdebug` # enable xdebug  
 
+### Search
+```bash
+# Search a File by Name
+find -name <file_name>
+```
+
+```bash
+# Search a File by Name - case-insensitive 
+find -iname <file_name>
+```
+
+
+```bash
+# Find a Directory in Linux
+find /path/to/search -type d
+```
+
+```bash
+# Find a Directory in Linux
+find /path/to/search -size <size_of_the_file>
+find /path/to/search -size +50M -size -100M
+```
+
+
 
 ## License
 Distributed under the MIT License. See **[LICENSE][license]** for more information.
