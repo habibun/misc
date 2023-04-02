@@ -23,7 +23,7 @@ width="50%"
 **Resources:**
  - [EasyAdmin! For an Awesomely Powerful Admin Area](https://symfonycasts.com/screencast/easyadminbundle)
 
-##### Prerequisites: [Symfony CLI][symfony_cli], [PHP][php], [Composer][composer], [Git][git], [MySQL][mysql], [Docker][docker], [Docker Compose][docker_compose]
+##### Prerequisites: [Symfony CLI][symfony_cli], [PHP][php], [Composer][composer], [Git][git], [MySQL][mysql], [PostgreSQL][postgre_sql], [Docker][docker], [Docker Compose][docker_compose]
 
 #### Installation
 
@@ -137,6 +137,7 @@ Distributed under the MIT License. See **[LICENSE][license]** for more informati
 [composer]: https://getcomposer.org/
 [git]: https://git-scm.com/
 [mysql]: https://www.mysql.com/
+[postgre_sql]: https://www.postgresql.org/
 [node]: https://nodejs.org/
 [docker]: https://www.docker.com/
 [docker_compose]: https://docs.docker.com/compose/
