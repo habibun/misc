@@ -8,6 +8,7 @@ Miscellaneous
 ### [Script](script)
 ### [Phpstorm](phpstorm)
 ### [Makefile](makefile)
+### [Bash](bash)
 
 --- 
 ## Command
