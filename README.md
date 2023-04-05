@@ -4,13 +4,14 @@ Miscellaneous
 ## Context
 
 ### [Nginx](nginx)
-### [Template](template)
 ### [Script](script)
 ### [Phpstorm](phpstorm)
 ### [Makefile](makefile)
 ### [Bash](bash)
+### [Readme](readme)
+##
 
---- 
+
 ## Command
 
 <details>
@@ -19,10 +20,26 @@ Miscellaneous
 
 [//]: # (### You can add a header)
 
-`df -h` # hard drive free space   
-`du -hs /path` # size of a directory   
-`du -hs /path/*` # size of a all directory inside   
-`du -hs /path/* | sort -rh` # size of a all directory inside and sort by size desc
+```bash
+# hard drive free space
+df -h 
+```
+
+```bash
+# size of a directory
+du -hs /path   
+```
+
+```bash
+# size of a all directory inside
+du -hs /path/*   
+```
+
+```bash
+# size of a all directory inside and sort by size desc
+du -hs /path/* | sort -rh
+```
+##
 
 </details>
 
@@ -32,8 +49,12 @@ Miscellaneous
 
 [//]: # (### You can add a header)
 
-`command & disown` # cmd should be started in an independent terminal
+```bash
+# cmd should be started in an independent terminal
+command & disown
+```
 
+##
 
 </details>
 
@@ -43,9 +64,16 @@ Miscellaneous
 
 [//]: # (### You can add a header)
 
-`truncate -s 0 file` # empty log files  
-`unrar x -r file.rar` # unpack files
+```bash
+# empty log files  
+truncate -s 0 file
+```
 
+```bash
+# unpack files 
+unrar x -r file.rar 
+```
+##
 
 </details>
 
@@ -77,10 +105,8 @@ find /path/to/search -type d
 find /path/to/search -size <size_of_the_file>
 find /path/to/search -size +50M -size -100M
 ```
-
-
+##
 </details>
-
 
 
 <details>
@@ -89,13 +115,21 @@ find /path/to/search -size +50M -size -100M
 
 [//]: # (### You can add a header)
 
-`sudo phpdismod xdebug` # disable xdebug  
-`sudo phpenmod xdebug` # enable xdebug
+```bash
+# enable xdebug
+sudo phpenmod xdebug
+```
 
+```bash
+# disable xdebug
+sudo phpdismod xdebug  
+```
+##
 
 </details>
 
 [Learn More](./command)
+
 
 ## License
 Distributed under the MIT License. See **[LICENSE][license]** for more information.
