@@ -131,6 +131,11 @@ sudo phpdismod xdebug
 [Learn More](./command)
 
 
+## Other
+- [How to read your way to becoming a better developer](https://www.freecodecamp.org/news/how-to-read-your-way-to-becoming-a-better-developer-b6432fa5bc0c/)
+
+
+
 ## License
 Distributed under the MIT License. See **[LICENSE][license]** for more information.
 
