@@ -4,7 +4,6 @@ Miscellaneous
 ## Context
 
 ### [Script](script)
-### [Phpstorm](phpstorm)
 ### [Makefile](makefile)
 ### [Bash](bash)
 ### [Readme](readme)
