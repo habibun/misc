@@ -1,19 +1,11 @@
 ## About The Project
 Miscellaneous  
 
-## Context
-
-### [Script](script)
-### [Bash](bash)
-### [Readme](readme)
-##
-
-
-## Other
+## 
 - [How to read your way to becoming a better developer](https://www.freecodecamp.org/news/how-to-read-your-way-to-becoming-a-better-developer-b6432fa5bc0c/)
 - [mkcert](https://github.com/FiloSottile/mkcert)
 - [Best-README-Template](https://github.com/othneildrew/Best-README-Template)  
-
+##
 
 
 ## License
