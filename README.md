@@ -3,7 +3,6 @@ Miscellaneous
 
 ## Context
 
-### [Nginx](nginx)
 ### [Script](script)
 ### [Phpstorm](phpstorm)
 ### [Makefile](makefile)
