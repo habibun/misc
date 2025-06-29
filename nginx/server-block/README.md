@@ -1,4 +1,0 @@
-## Server Block
-
----
-[Symfony](symfony)
