@@ -4,7 +4,6 @@ Miscellaneous
 ## Context
 
 ### [Script](script)
-### [Makefile](makefile)
 ### [Bash](bash)
 ### [Readme](readme)
 ##
